@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         TextView txtResult = findViewById(R.id.txtResult);
         EditText numInput = findViewById(R.id.numInput);
         EditText frac = findViewById(R.id.numFrac);
+        Button b = findViewById(R.id.button);
         int denom = 0;
         try {
             denom = Integer.parseInt(frac.getText().toString());
@@ -38,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
         }
         //IDK if i need error handling for this
         try {//I do
+            String s = utils.decToFrac(Double.parseDouble(numInput.getText().toString()), denom);
             txtResult.setText(utils.decToFrac(Double.parseDouble(numInput.getText().toString()), denom));
+            b.setText(Double.toString(utils.fracToDouble(s)));
         }catch (Exception e){
             numInput.setText("Bad");
         }

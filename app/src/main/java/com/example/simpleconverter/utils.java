@@ -1,4 +1,6 @@
 package com.example.simpleconverter;
+import android.util.Log;
+
 import java.lang.Math;
 public class utils {
     public static String decToFrac(double input, int d) {
@@ -41,6 +43,40 @@ public class utils {
             denominator+=frac.toCharArray()[i]-48;
         }
         return reduceFrac(numerator,denominator);
+    }
+    public static double fracToDouble(String f){
+        double result=0;
+        int space=0,slash=0;
+        double numerator=0;
+        double denominator=0;
+        for(int i =0;i<f.length();i++){
+            if(f.toCharArray()[i]!=' '){
+                result*=10;
+                result+=f.toCharArray()[i]-48;
+               // Log.d("WHAT",Double.toString(result));
+            }
+            else {
+                space=i;
+                break;
+            }
+        }
+        for(int i = space+1; i<f.length();i++){
+            //find numerator
+            if(f.toCharArray()[i]=='/'){
+                slash=i;
+                break;
+            }
+            numerator*=10;
+            numerator+=f.toCharArray()[i]-48;
+        }
+        for(int i = slash+1; i<f.length();i++){
+            //find denominator
+            denominator*=10;
+            denominator+=f.toCharArray()[i]-48;
+        }
+        //Log.d("WHAT",Double.toString(numerator));
+        //Log.d("WHAT",Double.toString(denominator));
+        return result+=numerator/denominator;
     }
     public static String reduceFrac(int numerator, int denominator){
         int x=2;
