@@ -25,13 +25,17 @@ public class TriangleActivity extends AppCompatActivity {
             }
         }
         t = new Triangle(sides[0],sides[1],sides[2],sides[3],sides[4],sides[5]);//cursed
-        fillTriangle(t);
+        if(utils.isRightTriangle(t)||true) {
+            utils.calculateAngles(t);
+            utils.calculateSides(t);
+            fillTriangle(t);
+        }
     }
     public void fillTriangle(Triangle a){
         EditText[] txtSide = {findViewById(R.id.txtSideA),findViewById(R.id.txtSideB),findViewById(R.id.txtSideC),findViewById(R.id.txtAngleA),findViewById(R.id.txtAngleB)};
         double[] sides ={a.getSide_a(),a.getSide_b(),a.getSide_c(),a.getAngleA(),a.getAngleB()};
         for(int i = 0;i<5;i++){//no Angle C
-            txtSide[i].setText(Double.toString(sides[i]));
+            txtSide[i].setText(utils.decToFrac(sides[i],16));
         }
     }
 }

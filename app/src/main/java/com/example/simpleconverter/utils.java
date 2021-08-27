@@ -80,8 +80,8 @@ public class utils {
             a.setAngleA(90 - a.getAngleB());
         }
         else if (a.getSide_a()>0 && a.getSide_b()>0){
-            a.setAngleA(Math.toDegrees(Math.atan (a.getSide_a()/a.getSide_b())));
-            a.setAngleB(Math.toDegrees(Math.atan (a.getSide_b()/a.getSide_a())));
+            a.setAngleA(Math.toDegrees(Math.atan(a.getSide_a()/a.getSide_b())));
+            a.setAngleB(Math.toDegrees(Math.atan(a.getSide_b()/a.getSide_a())));
         }
         else if (a.getSide_a()>0 && a.getSide_c()>0){
             a.setAngleA(Math.toDegrees(Math.asin (a.getSide_a()/a.getSide_c())));
