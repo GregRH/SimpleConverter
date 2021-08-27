@@ -63,7 +63,14 @@ public class utils {
     public static boolean isRightTriangle(Triangle a){
         //Check sides, valid if pythagorean theorem
         //Check angles, valid if both angles input and equal 90
-        return false;
+        if(a.getAngleA()+a.getAngleB()!=90)
+            return false;
+        double sum = a.getSide_a()*a.getSide_a()+a.getSide_b()*a.getSide_b();
+        double err = 1/16;
+        if(Math.abs((a.getSide_c()*a.getSide_c())-sum)>err){
+            return false;
+        }
+        return true;
     }
     public static void calculateAngles(Triangle a){
         if (a.getAngleA()>0) {
@@ -92,6 +99,24 @@ public class utils {
         }*/
     }
     public static void calculateSides(Triangle a){
+        if (a.getSide_a()>0){
+           a.setSide_b(a.getSide_a() / Math.tan(Math.toRadians(a.getAngleA())));
+            a.setSide_c(a.getSide_a() / Math.sin(Math.toRadians(a.getAngleA())));
+        }
+        else if (a.getSide_b()>0){
+            a.setSide_a(a.getSide_b() / Math.tan(Math.toRadians(a.getAngleB())));
+            a.setSide_c(a.getSide_b() / Math.sin(Math.toRadians(a.getAngleB())));
+        }
 
+        else if (a.getSide_c()>0){
+            a.setSide_a(a.getSide_c() * Math.sin(Math.toRadians(a.getAngleA())));
+            a.setSide_b(a.getSide_c() * Math.cos(Math.toRadians(a.getAngleA())));
+        }
+        if (a.getSide_a()>0 && a.getSide_b()>0 && a.getSide_c()>0){
+
+        }
+        else {
+            //Not enough information
+        }
     }
 }

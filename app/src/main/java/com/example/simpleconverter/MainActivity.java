@@ -2,6 +2,7 @@ package com.example.simpleconverter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -16,6 +17,9 @@ public class MainActivity extends AppCompatActivity {
         TextView txtResult = findViewById(R.id.txtResult);
         txtResult.setText("Enter a decimal");
         frac.setText(Integer.toString(16));
+    }
+    public void toTriangle(View view){
+        startActivity(new Intent(MainActivity.this, TriangleActivity.class));
     }
     public void onBtnClick(View view) {
         TextView txtResult = findViewById(R.id.txtResult);
