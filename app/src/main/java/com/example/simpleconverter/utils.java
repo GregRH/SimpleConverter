@@ -102,7 +102,7 @@ public class utils {
         if(a.getAngleA()+a.getAngleB()!=90)
             return false;
         double sum = a.getSide_a()*a.getSide_a()+a.getSide_b()*a.getSide_b();
-        double err = 1/16;
+        double err = 1/64;
         if(Math.abs((a.getSide_c()*a.getSide_c())-sum)>err){
             return false;
         }

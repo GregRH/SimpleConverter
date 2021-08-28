@@ -3,6 +3,7 @@ package com.example.simpleconverter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -16,15 +17,16 @@ public class TriangleActivity extends AppCompatActivity {
     public void calcTriangle(View view){
         Triangle t ;
         EditText[] txtSide = {findViewById(R.id.txtSideA),findViewById(R.id.txtSideB),findViewById(R.id.txtSideC),findViewById(R.id.txtAngleA),findViewById(R.id.txtAngleB)};
-        double[] sides = new double[6];
-        for(int i = 0; i<6;i++){
+        double[] sides = new double[5];
+        for(int i = 0; i<5;i++){
             try{//this is really bad
                 sides[i]=Double.parseDouble(txtSide[i].getText().toString());
             }catch(Exception e){
+                Log.d("err message",e.getMessage());
                 sides[i]=0;
             }
         }
-        t = new Triangle(sides[0],sides[1],sides[2],sides[3],sides[4],sides[5]);//cursed
+        t = new Triangle(sides[0],sides[1],sides[2],sides[3],sides[4],90);
         if(utils.isRightTriangle(t)||true) {
             utils.calculateAngles(t);
             utils.calculateSides(t);
@@ -37,5 +39,9 @@ public class TriangleActivity extends AppCompatActivity {
         for(int i = 0;i<5;i++){//no Angle C
             txtSide[i].setText(utils.decToFrac(sides[i],16));
         }
+    }
+    public boolean checkValidinput(EditText text){
+        boolean rtrn = false;
+        return rtrn;
     }
 }
