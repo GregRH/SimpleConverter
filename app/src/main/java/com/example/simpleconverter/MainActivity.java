@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         EditText numInput = findViewById(R.id.numInput);
         EditText frac = findViewById(R.id.numFrac);
         Button b = findViewById(R.id.button);
-        int denom = 0;
+        int denom;
         try {
             denom = Integer.parseInt(frac.getText().toString());
         } catch(Exception e){
@@ -40,9 +40,13 @@ public class MainActivity extends AppCompatActivity {
         }
         //IDK if i need error handling for this
         try {//I do
-            String s = utils.decToFrac(Double.parseDouble(numInput.getText().toString()), denom);
-            txtResult.setText(utils.decToFrac(Double.parseDouble(numInput.getText().toString()), denom));
-            b.setText(Double.toString(utils.fracToDouble(s)));
+            if(utils.checkValidinput(numInput.getText().toString())) {
+                String s = utils.decToFrac(Double.parseDouble(numInput.getText().toString()), denom);
+                txtResult.setText(utils.decToFrac(Double.parseDouble(numInput.getText().toString()), denom));
+                if (utils.checkValidinput(s)) {
+                    b.setText(Double.toString(utils.fracToDouble(s)));
+                }
+            }
         }catch (Exception e){
             numInput.setText("Bad");
         }

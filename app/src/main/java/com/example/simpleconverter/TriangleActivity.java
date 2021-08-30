@@ -27,7 +27,7 @@ public class TriangleActivity extends AppCompatActivity {
             }
         }
         t = new Triangle(sides[0],sides[1],sides[2],sides[3],sides[4],90);
-        if(utils.isRightTriangle(t)||true) {
+        if(utils.isRightTriangle(t)||true) {//this function isn't finished
             utils.calculateAngles(t);
             utils.calculateSides(t);
             fillTriangle(t);
@@ -40,8 +40,5 @@ public class TriangleActivity extends AppCompatActivity {
             txtSide[i].setText(utils.decToFrac(sides[i],16));
         }
     }
-    public boolean checkValidinput(EditText text){
-        boolean rtrn = false;
-        return rtrn;
-    }
+
 }

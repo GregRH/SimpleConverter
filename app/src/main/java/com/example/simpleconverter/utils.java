@@ -1,8 +1,24 @@
 package com.example.simpleconverter;
 import android.util.Log;
-
+import android.widget.EditText;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.lang.Math;
 public class utils {
+    public static boolean checkValidinput(String text){
+        //valid if input is mixed number formated as number 'space' numerator'/'denominator or number'.'number
+        Pattern p1 =  Pattern.compile("[0-9]+\\s+[0-9]+/[0-9]+");//Fraction
+        Pattern p2 = Pattern.compile("[0-9]+\\.[0-9]+");//Decimal
+        Matcher m = p1.matcher(text);
+        boolean rtrn = m.find();
+        Log.d("patern1",Boolean.toString(rtrn));
+        if (!rtrn){
+            m = p2.matcher(text);
+            rtrn = m.find();
+            Log.d("patern2",Boolean.toString(rtrn));
+        }
+        return rtrn;
+    }
     public static String decToFrac(double input, int d) {
         //pass it a number in decimal and it will convert it to the nearest fraction with d as the denominator
         //d > 0
@@ -102,7 +118,7 @@ public class utils {
         if(a.getAngleA()+a.getAngleB()!=90)
             return false;
         double sum = a.getSide_a()*a.getSide_a()+a.getSide_b()*a.getSide_b();
-        double err = 1/64;
+        double err = 1.0/64;
         if(Math.abs((a.getSide_c()*a.getSide_c())-sum)>err){
             return false;
         }
