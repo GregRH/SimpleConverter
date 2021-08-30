@@ -8,7 +8,7 @@ public class utils {
     public static boolean checkValidinput(String text){
         //valid if input is mixed number formated as number 'space' numerator'/'denominator or number'.'number
         Pattern p1 =  Pattern.compile("[0-9]+\\s+[0-9]+/[0-9]+");//Fraction
-        Pattern p2 = Pattern.compile("[0-9]+\\.[0-9]+");//Decimal
+        Pattern p2 = Pattern.compile("[0-9]*\\.[0-9]+");//Decimal
         Pattern p3 = Pattern.compile("^[0-9]+$");//just a number
         Matcher m = p1.matcher(text);
         boolean rtrn = m.find();
@@ -39,43 +39,29 @@ public class utils {
         }
         String reduced = reduceFrac(i,d);
         if(reduced.toCharArray()[0]=='1'&&reduced.toCharArray()[2]=='1'&&reduced.length()==3)
-            //if 1/1 add one
+            //if 1/1 add one to the whole number instead of the fraction
             r=Integer.toString((int) input+1);
         else if(reduced.toCharArray()[0]!='0')
-            //if not 0/x add the fraction
+            //if not 0/x add the fraction to the whole number
             r = r + " " + reduced;
+        if(r.toCharArray()[0]=='0')
+            //if the number is less than 1 only use the fraction
+            r=reduced;
         return r;
     }
-    public static String reduceFrac(String frac){
-        int numerator=0;
-        int denominator=0;
-        int slash_pos=0;
-        for(int i = 0; i<frac.length();i++){
-            //find numerator
-            if(frac.toCharArray()[i]=='/'){
-                slash_pos=i;
-                break;
-            }
-            numerator*=10;
-            numerator+=frac.toCharArray()[i]-48;
-        }
-        for(int i = slash_pos+1; i<frac.length();i++){
-            //find denominator
-            denominator*=10;
-            denominator+=frac.toCharArray()[i]-48;
-        }
-        return reduceFrac(numerator,denominator);
-    }
     public static double fracToDouble(String f){
+        //TODO add support for only whole numbers(just return f)
+        //TODO add support for fractions without whole numbers, ie less than 1 or improper fractions
         double result=0;
         int space=0,slash=0;
         double numerator=0;
         double denominator=0;
         for(int i =0;i<f.length();i++){
+            //finds whole number
             if(f.toCharArray()[i]!=' '){
                 result*=10;
                 result+=f.toCharArray()[i]-48;
-               // Log.d("WHAT",Double.toString(result));
+               // Log.d("fracToDouble whole number",Double.toString(result));
             }
             else {
                 space=i;
@@ -100,7 +86,7 @@ public class utils {
         //Log.d("WHAT",Double.toString(denominator));
         return result+=numerator/denominator;
     }
-    public static String reduceFrac(int numerator, int denominator){
+    public static String reduceFrac(int numerator, int denominator){//TODO Add odd number support
         int x=2;
         try {
             while((numerator&1)==0&&(denominator&1)==0){//Even numbers only
@@ -118,7 +104,28 @@ public class utils {
         }
         return Integer.toString(numerator)+"/"+Integer.toString(denominator);
     }
-    public static boolean isRightTriangle(Triangle a){
+    public static String reduceFrac(String frac){//utility accepts fraction as a string numerator/denominator
+        //TODO change this to include mixed numbers
+        int numerator=0;
+        int denominator=0;
+        int slash_pos=0;
+        for(int i = 0; i<frac.length();i++){
+            //find numerator
+            if(frac.toCharArray()[i]=='/'){
+                slash_pos=i;
+                break;
+            }
+            numerator*=10;
+            numerator+=frac.toCharArray()[i]-48;
+        }
+        for(int i = slash_pos+1; i<frac.length();i++){
+            //find denominator
+            denominator*=10;
+            denominator+=frac.toCharArray()[i]-48;
+        }
+        return reduceFrac(numerator,denominator);
+    }
+    public static boolean isRightTriangle(Triangle a){//TODO fix this
         //Check sides, valid if pythagorean theorem
         //Check angles, valid if both angles input and equal 90
         if(a.getAngleA()+a.getAngleB()!=90)
@@ -130,7 +137,7 @@ public class utils {
         }
         return true;
     }
-    public static void calculateAngles(Triangle a){
+    public static void calculateAngles(Triangle a){//TODO consider making this a boolean to return success
         if (a.getAngleA()>0) {
             a.setAngleB(90 - a.getAngleA());
         }
@@ -156,7 +163,7 @@ public class utils {
             //not enough information
         }*/
     }
-    public static void calculateSides(Triangle a){
+    public static void calculateSides(Triangle a){//TODO consider making this a boolean to return success
         if (a.getSide_a()>0){
            a.setSide_b(a.getSide_a() / Math.tan(Math.toRadians(a.getAngleA())));
             a.setSide_c(a.getSide_a() / Math.sin(Math.toRadians(a.getAngleA())));

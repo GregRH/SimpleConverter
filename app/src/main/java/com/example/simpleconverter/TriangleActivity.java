@@ -20,7 +20,7 @@ public class TriangleActivity extends AppCompatActivity {
         double[] sides = new double[5];
         for(int i = 0; i<5;i++){
             try{//this is really bad
-                sides[i]=Double.parseDouble(txtSide[i].getText().toString());
+                sides[i]=Double.parseDouble(txtSide[i].getText().toString());//TODO use the function to check input
             }catch(Exception e){
                 Log.d("err message",e.getMessage());
                 sides[i]=0;
