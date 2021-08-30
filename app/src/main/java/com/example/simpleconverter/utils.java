@@ -9,6 +9,7 @@ public class utils {
         //valid if input is mixed number formated as number 'space' numerator'/'denominator or number'.'number
         Pattern p1 =  Pattern.compile("[0-9]+\\s+[0-9]+/[0-9]+");//Fraction
         Pattern p2 = Pattern.compile("[0-9]+\\.[0-9]+");//Decimal
+        Pattern p3 = Pattern.compile("^[0-9]+$");//just a number
         Matcher m = p1.matcher(text);
         boolean rtrn = m.find();
         Log.d("patern1",Boolean.toString(rtrn));
@@ -16,6 +17,11 @@ public class utils {
             m = p2.matcher(text);
             rtrn = m.find();
             Log.d("patern2",Boolean.toString(rtrn));
+            if(!rtrn){
+                m=p3.matcher(text);
+                rtrn = m.find();
+                Log.d("pattern3",Boolean.toString(rtrn));
+            }
         }
         return rtrn;
     }
