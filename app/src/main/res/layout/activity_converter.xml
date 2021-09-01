@@ -67,4 +67,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/InstructionsTxt" />
+
+    <Switch
+        android:id="@+id/ReduceSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Reduce"
+        app:layout_constraintBottom_toBottomOf="@+id/DenomTxt"
+        app:layout_constraintStart_toEndOf="@+id/DenomTxt" />
 </androidx.constraintlayout.widget.ConstraintLayout>

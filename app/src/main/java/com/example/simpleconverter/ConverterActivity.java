@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.EditText;
 public class ConverterActivity extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class ConverterActivity extends AppCompatActivity {
         EditText input = findViewById(R.id.NumInTxt);
         EditText frac = findViewById(R.id.DenomTxt);
         TextView result = findViewById(R.id.resultTxt);
+        Switch reduceSwitch = findViewById(R.id.ReduceSwitch);
         int denom=16;
         if(isNum(frac.getText().toString())){
             try {
@@ -42,7 +44,7 @@ public class ConverterActivity extends AppCompatActivity {
                     result.setText(Double.toString(utils.fracToDouble(input.getText().toString())));
                 else
                     //convert to fraction
-                result.setText(utils.decToFrac(Double.parseDouble(input.getText().toString()), denom));
+                result.setText(utils.decToFrac(Double.parseDouble(input.getText().toString()), denom,reduceSwitch.isChecked()));
 
             }
             else

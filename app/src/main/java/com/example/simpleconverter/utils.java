@@ -32,10 +32,11 @@ public class utils {
                     return true;
         return false;
     }
-    public static String decToFrac(double input, int d) {
+    public static String decToFrac(double input, int d,boolean reduce) {
         //pass it a number in decimal and it will convert it to the nearest fraction with d as the denominator
         //d > 0
         String r = Integer.toString((int) input);
+        String reduced;
         double x = input;
         double err = 1 / (d * 2.0); //err is halfway between units
         x = x - (int) x;
@@ -44,17 +45,24 @@ public class utils {
             i++;
             x = x - (1.0 / d);
         }
-        String reduced = reduceFrac(i,d);//TODO Consider making reduction to optional
-        if(reduced.toCharArray()[0]=='1'&&reduced.toCharArray()[2]=='1'&&reduced.length()==3)
+        if (reduce == true) {
+            reduced = reduceFrac(i, d);//Reducing is optional
+        }
+        else
+            reduced = ""+i+"/"+d;
+        if (reduced.toCharArray()[0] == '1' && reduced.toCharArray()[2] == '1' && reduced.length() == 3)
             //if 1/1 add one to the whole number instead of the fraction
-            r=Integer.toString((int) input+1);
-        else if(reduced.toCharArray()[0]!='0')
+            r = Integer.toString((int) input + 1);
+        else if (reduced.toCharArray()[0] != '0')
             //if not 0/x add the fraction to the whole number
             r = r + " " + reduced;
         if(r.toCharArray()[0]=='0')
             //if the number is less than 1 only use the fraction
             r=reduced;
         return r;
+    }
+    public static String decToFrac(double input, int d) {
+        return decToFrac(input,d,true);//TODO function to preserve old functionality, remove eventually
     }
     public static double fracToDouble(String f){
         //TODO add support for only whole numbers(just return f)
