@@ -7,8 +7,8 @@ import java.lang.Math;
 public class utils {
     public static boolean checkValidinput(String text){
         //valid if input is mixed number formated as number 'space' numerator'/'denominator or number'.'number
-        Pattern p1 =  Pattern.compile("[0-9]+\\s+[0-9]+/[0-9]+");//Fraction
-        Pattern p2 = Pattern.compile("[0-9]*\\.[0-9]+");//Decimal
+        Pattern p1 =  Pattern.compile("^[0-9]+\\s+[0-9]+/[0-9]+$");//Fraction
+        Pattern p2 = Pattern.compile("^[0-9]*\\.[0-9]+$");//Decimal
         Pattern p3 = Pattern.compile("^[0-9]+$");//just a number
         Matcher m = p1.matcher(text);
         boolean rtrn = m.find();
@@ -25,6 +25,13 @@ public class utils {
         }
         return rtrn;
     }
+    public static boolean isFrac(String text){
+        if(checkValidinput(text))
+            for(int i = 0; i<text.length();i++)
+                if(text.toCharArray()[i]=='/')
+                    return true;
+        return false;
+    }
     public static String decToFrac(double input, int d) {
         //pass it a number in decimal and it will convert it to the nearest fraction with d as the denominator
         //d > 0
@@ -37,7 +44,7 @@ public class utils {
             i++;
             x = x - (1.0 / d);
         }
-        String reduced = reduceFrac(i,d);
+        String reduced = reduceFrac(i,d);//TODO Consider making reduction to optional
         if(reduced.toCharArray()[0]=='1'&&reduced.toCharArray()[2]=='1'&&reduced.length()==3)
             //if 1/1 add one to the whole number instead of the fraction
             r=Integer.toString((int) input+1);
