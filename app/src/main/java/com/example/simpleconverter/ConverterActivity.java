@@ -18,6 +18,7 @@ public class ConverterActivity extends AppCompatActivity {
         TextView instructions = findViewById(R.id.InstructionsTxt);
         TextView result = findViewById(R.id.resultTxt);
         result.setText("Results are shown here");
+        //todo change reduce text
         instructions.setText("Converts between decimals and mixed numbers.\nYou can set the accuracy by changing denominator but mixed numbers are reduced.\nEnter a number as a decimal or mixed number. \nex\n10.5\n10 1/2");
     }
     public void calcButton(View view){
@@ -33,6 +34,7 @@ public class ConverterActivity extends AppCompatActivity {
                 Log.d("Converter","Denominator"+denom);
             }catch(Exception e){
                 denom=16;
+                frac.setText(denom+"");
                 Log.d("Converter","Invalid Denominator");
             }
         }
@@ -55,6 +57,8 @@ public class ConverterActivity extends AppCompatActivity {
         }
     }
     private boolean isNum(String string){
+        if(string == "")
+            return false;
         for(int i =0;i<string.length();i++){
             if((string.toCharArray()[i]-'0')>9||(string.toCharArray()[i]-'0')<0)
                 return false;
