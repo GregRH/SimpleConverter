@@ -7,7 +7,7 @@ import java.lang.Math;
 public class utils {
     public static boolean checkValidinput(String text){
         //valid if input is mixed number formated as number 'space' numerator'/'denominator or number'.'number
-        Pattern p1 =  Pattern.compile("^[0-9]+\\s+[0-9]+/[0-9]+$");//Fraction
+        Pattern p1 =  Pattern.compile("^[0-9]+\\s[0-9]+/[0-9]+$");//Fraction
         Pattern p2 = Pattern.compile("^[0-9]*\\.[0-9]+$");//Decimal
         Pattern p3 = Pattern.compile("^[0-9]+$");//just a number
         Matcher m = p1.matcher(text);
