@@ -140,7 +140,36 @@ public class utils {
         }
         return reduceFrac(numerator,denominator);
     }
-    public static boolean isRightTriangle(Triangle a){//TODO fix this
+
+    //Todo Change these to the universal SSS SAS SSA AAS ASA, consider moving them to the triangle object instead
+    /*
+        SSS
+            A=arccos((b^2+c^2-a^2)/2bc)
+            B=arccos((a^2+c^2-b^2)/2ac)
+        SAS(given aCb in this case)
+            c=sqrt(a^2+b^2-2abcosC)
+            A=arccos((b^2+c^2-a^2)/2bc)
+            B=180-A-C
+        SSA(in this case given bcB
+            not always solvable
+            works only if the adjacent side is shorter than the other
+            D=(c/b)sinB
+            D>1 not a triangle
+            D=1 right triangle, works
+            D<1 two possibilities
+                b>=c then B>=C because no triangle can have two obtuse angles it must be unique
+                b<c C maybe acute or obtuse therefore it is impossible to calculate
+            sinC=(c/b)sinB
+            A=180-C-B
+            a=b*(sinA/sinB)
+        ASA
+            subtract angles from 180
+            a=c(sinA/sinC)
+            b=c(sinB/sinC)
+        AAS
+            same as ASA
+     */
+    public static boolean isRightTriangle(Triangle a){//TODO fix this, maybe remove?
         //Check sides, valid if pythagorean theorem
         //Check angles, valid if both angles input and equal 90
         if(a.getAngleA()+a.getAngleB()!=90)

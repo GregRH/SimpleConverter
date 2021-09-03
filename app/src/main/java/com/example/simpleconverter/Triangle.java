@@ -1,7 +1,7 @@
 package com.example.simpleconverter;
 
-public class Triangle {
-    private double side_a,side_b,side_c;
+public class Triangle { //todo make a shape class
+    private double side_a,side_b,side_c; //todo change to an array
     private double angleA, angleB,angleC;
     public Triangle(double a,double b,double c,double A, double B, double C){
         side_a=a;

@@ -29,7 +29,6 @@ public class ConverterActivity extends AppCompatActivity {
         int denom=16;
         if(isNum(frac.getText().toString())){
             try {
-
                 denom=Integer.parseInt(frac.getText().toString());
                 Log.d("Converter","Denominator"+denom);
             }catch(Exception e){
