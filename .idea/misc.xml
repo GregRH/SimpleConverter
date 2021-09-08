@@ -3,11 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/gryan/StudioProjects/SimpleConverter/app/src/main/res/layout/activity_converter.xml" value="0.4119791666666667" />
         <entry key="..\:/Users/Rob/StudioProjects/SimpleConverter/app/src/main/res/layout/activity_draw.xml" value="0.22429905742399064" />
         <entry key="..\:/Users/Rob/StudioProjects/SimpleConverter/app/src/main/res/layout/activity_main.xml" value="0.4485981148479813" />
         <entry key="..\:/Users/Rob/StudioProjects/SimpleConverter/app/src/main/res/layout/activity_triangle.xml" value="0.2838541666666667" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_triangle.xml" value="0.25" />
+        <entry key="..\:/Users/gryan/StudioProjects/SimpleConverter/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/gryan/StudioProjects/SimpleConverter/app/src/main/res/layout/activity_triangle.xml" value="0.25" />
       </map>
     </option>
   </component>
