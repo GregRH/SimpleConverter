@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleConverter">
         <activity
+            android:name=".DrawActivity"
+            android:exported="true" />
+        <activity
             android:name=".TriangleActivity"
             android:exported="true" />
         <activity

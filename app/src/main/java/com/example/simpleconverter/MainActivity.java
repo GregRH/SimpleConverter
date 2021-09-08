@@ -22,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
     public void toTriangle(View view){
         startActivity(new Intent(MainActivity.this, TriangleActivity.class));
     }
+
+    public void toDraw(View view){
+        startActivity(new Intent(MainActivity.this, DrawActivity.class));
+    }
+
     public void onBtnClick(View view) {
         TextView txtResult = findViewById(R.id.txtResult);
         EditText numInput = findViewById(R.id.numInput);
