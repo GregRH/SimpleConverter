@@ -13,6 +13,9 @@
             android:name=".ConverterActivity"
             android:exported="true" />
         <activity
+            android:name=".DrawActivity"
+            android:exported="true" />
+        <activity
             android:name=".TriangleActivity"
             android:exported="true" />
         <activity
