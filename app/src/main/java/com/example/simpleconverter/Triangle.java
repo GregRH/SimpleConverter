@@ -1,53 +1,69 @@
 package com.example.simpleconverter;
 
-public class Triangle { //todo make a shape class
-    private double side_a,side_b,side_c; //todo change to an array
-    private double angleA, angleB,angleC;
+public class Triangle extends Shape {
+    public final int side_a =0;
+    public final int side_b=1;
+    public final int side_c=2;
+    public final int angle_A=0;
+    public final int angle_B=1;
+    public final int angle_C=2;
     public Triangle(double a,double b,double c,double A, double B, double C){
-        side_a=a;
-        side_b=b;
-        side_c=c;
-        angleA=A;
-        angleB=B;
-        angleC=C;
+        sides = new double[3];
+        angles = new double[3];
+        sides[0]=a;
+        sides[1]=b;
+        sides[2]=c;
+        angles[0]=A;
+        angles[1]=B;
+        angles[2]=C;
+
+    }
+    public Triangle(double s[], double a[]){
+        sides = new double[3];
+        angles = new double[3];
+        for (int i = 0; i<sides.length;i++){//zero out arrays
+            sides[i]=0;
+            angles[i]=0;
+        }
+        if(s.length>=3&&a.length>=3)
+            for (int i = 0; i<sides.length;i++){
+                sides[i]=s[i];
+                angles[i]=a[i];
+            }
+        else{
+            for (int i = 0; i<s.length;i++){
+                sides[i]=s[i];
+            }
+            for (int i = 0; i<a.length;i++){
+                angles[i]=a[i];
+            }
+        }
+
+    }
+    public Triangle(double s[]) {
+        sides = new double[3];
+        angles = new double[3];
+        for (int i = 0; i < sides.length; i++) {//zero out arrays
+            sides[i] = 0;
+            angles[i] = 0;
+        }
+        for(int i =0; (i<s.length)&&i<3;i++) {
+            sides[i] = s[i];
+        }
+        for(int i = 3;(i<s.length)&&i-3<3;i++){
+            angles[i-3]=s[i];
+        }
     }
     public Triangle(){
         this(0,0,0,0,0,0);
     }
-    public double getAngleA(){
-        return angleA;
+    @Override
+    public String getShape() {
+        return "Triangle";
     }
-    public double getAngleB(){
-        return angleB;
-    }
-    public double getAngleC(){
-        return angleC;
-    }
-    public double getSide_a(){
-        return side_a;
-    }
-    public double getSide_b(){
-        return side_b;
-    }
-    public double getSide_c(){
-        return side_c;
-    }
-    public void setAngleA(double A){
-        angleA=A;
-    }
-    public void setAngleB(double B){
-        angleB=B;
-    }
-    public void setAngleC(double C){
-        angleC=C;
-    }
-    public void setSide_a(double a){
-        side_a=a;
-    }
-    public void setSide_b(double b){
-        side_b=b;
-    }
-    public void setSide_c(double c){
-        side_c=c;
+
+    @Override
+    public double getArea() {//todo add function
+        return 0;
     }
 }

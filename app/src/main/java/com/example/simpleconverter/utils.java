@@ -169,59 +169,78 @@ public class utils {
         AAS
             same as ASA
      */
-    public static boolean isRightTriangle(Triangle a){//TODO fix this, maybe remove?
+    public static boolean isRightTriangle(Triangle t){//TODO fix this, maybe remove?
         //Check sides, valid if pythagorean theorem
         //Check angles, valid if both angles input and equal 90
-        if(a.getAngleA()+a.getAngleB()!=90)
+        int a,b,c,A,B;//Temp these should be final
+        a=0;
+        b=1;
+        c=2;
+        A=0;
+        B=1;
+
+        if(t.getAngle(A)+t.getAngle(B)!=90)
             return false;
-        double sum = a.getSide_a()*a.getSide_a()+a.getSide_b()*a.getSide_b();
+        double sum = t.getSide(a)*t.getSide(a)+t.getSide(b)*t.getSide(b);
         double err = 1.0/64;
-        if(Math.abs((a.getSide_c()*a.getSide_c())-sum)>err){
+        if(Math.abs((t.getSide(c)*t.getSide(c))-sum)>err){
             return false;
         }
         return true;
     }
-    public static void calculateAngles(Triangle a){//TODO consider making this a boolean to return success
-        if (a.getAngleA()>0) {
-            a.setAngleB(90 - a.getAngleA());
+    public static void calculateAngles(Triangle t){//TODO consider making this a boolean to return success
+        int a,b,c,A,B;//Temp these should be final
+        a=0;
+        b=1;
+        c=2;
+        A=0;
+        B=1;
+        if (t.getAngle(A)>0.0) {
+            t.setAngle(B,90 - t.getAngle(A));
         }
-        else if (a.getAngleB()>0) {
-            a.setAngleA(90 - a.getAngleB());
+        else if (t.getAngle(B)>0.0) {
+            t.setAngle(A,90 - t.getAngle(B));
         }
-        else if (a.getSide_a()>0 && a.getSide_b()>0){
-            a.setAngleA(Math.toDegrees(Math.atan(a.getSide_a()/a.getSide_b())));
-            a.setAngleB(Math.toDegrees(Math.atan(a.getSide_b()/a.getSide_a())));
+        else if (t.getSide(a)>0.0 && t.getSide(b)>0.0){
+            t.setAngle(A,Math.toDegrees(Math.atan(t.getSide(a)/t.getSide(b))));
+            t.setAngle(B,Math.toDegrees(Math.atan(t.getSide(b)/t.getSide(a))));
         }
-        else if (a.getSide_a()>0 && a.getSide_c()>0){
-            a.setAngleA(Math.toDegrees(Math.asin (a.getSide_a()/a.getSide_c())));
-            a.setAngleB(Math.toDegrees(Math.acos (a.getSide_a()/a.getSide_c())));
+        else if (t.getSide(a)>0.0 && t.getSide(c)>0.0){
+            t.setAngle(A,Math.toDegrees(Math.asin (t.getSide(a)/t.getSide(c))));
+            t.setAngle(B,Math.toDegrees(Math.acos (t.getSide(a)/t.getSide(c))));
         }
-        else if (a.getSide_b()>0 && a.getSide_c()>0){
-            a.setAngleA(Math.toDegrees(Math.acos (a.getSide_b()/a.getSide_c())));
-            a.setAngleB(Math.toDegrees(Math.asin (a.getSide_b()/a.getSide_c())));
+        else if (t.getSide(b)>0.0 && t.getSide(c)>0.0){
+            t.setAngle(A,Math.toDegrees(Math.acos (t.getSide(b)/t.getSide(c))));
+            t.setAngle(B,Math.toDegrees(Math.asin (t.getSide(b)/t.getSide(c))));
         }
-       /* if (a.getAngleA()>0 && a.getAngleB()>0){
+       /* if (t.getAngle(A)>0 && t.getAngle(B>0){
             //all angles calculated
         }
         else {
             //not enough information
         }*/
     }
-    public static void calculateSides(Triangle a){//TODO consider making this a boolean to return success
-        if (a.getSide_a()>0){
-           a.setSide_b(a.getSide_a() / Math.tan(Math.toRadians(a.getAngleA())));
-            a.setSide_c(a.getSide_a() / Math.sin(Math.toRadians(a.getAngleA())));
+    public static void calculateSides(Triangle t){//TODO consider making this a boolean to return success
+        int a,b,c,A,B;//Temp these should be final
+        a=0;
+        b=1;
+        c=2;
+        A=0;
+        B=1;
+        if (t.getSide(a)>0){
+           t.setSides(b,t.getSide(a) / Math.tan(Math.toRadians(t.getAngle(A))));
+            t.setSides(c,t.getSide(a) / Math.sin(Math.toRadians(t.getAngle(A))));
         }
-        else if (a.getSide_b()>0){
-            a.setSide_a(a.getSide_b() / Math.tan(Math.toRadians(a.getAngleB())));
-            a.setSide_c(a.getSide_b() / Math.sin(Math.toRadians(a.getAngleB())));
+        else if (t.getSide(b)>0){
+           t.setSides(a,t.getSide(b) / Math.tan(Math.toRadians(t.getAngle(B))));
+            t.setSides(c,t.getSide(b) / Math.sin(Math.toRadians(t.getAngle(B))));
         }
 
-        else if (a.getSide_c()>0){
-            a.setSide_a(a.getSide_c() * Math.sin(Math.toRadians(a.getAngleA())));
-            a.setSide_b(a.getSide_c() * Math.cos(Math.toRadians(a.getAngleA())));
+        else if (t.getSide(c)>0){
+            t.setSides(a,t.getSide(c) * Math.sin(Math.toRadians(t.getAngle(A))));
+            t.setSides(b,t.getSide(c) * Math.cos(Math.toRadians(t.getAngle(A))));
         }
-        if (a.getSide_a()>0 && a.getSide_b()>0 && a.getSide_c()>0){
+        if (t.getSide(a)>0 && t.getSide(b)>0 && t.getSide(c)>0){
 
         }
         else {

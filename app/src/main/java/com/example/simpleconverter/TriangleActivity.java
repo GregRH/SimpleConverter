@@ -35,9 +35,16 @@ public class TriangleActivity extends AppCompatActivity {
     }
     public void fillTriangle(Triangle a){
         EditText[] txtSide = {findViewById(R.id.txtSideA),findViewById(R.id.txtSideB),findViewById(R.id.txtSideC),findViewById(R.id.txtAngleA),findViewById(R.id.txtAngleB)};
-        double[] sides ={a.getSide_a(),a.getSide_b(),a.getSide_c(),a.getAngleA(),a.getAngleB()};
-        for(int i = 0;i<5;i++){//no Angle C
+        double[] sides =a.getSide();
+        double[] angles= a.getAngle();
+        Log.d("fill","");
+        for(int i = 0;i<sides.length;i++){
+            Log.d("fill","S"+i);
             txtSide[i].setText(utils.decToFrac(sides[i],16));
+        }
+        for(int i = 0;i<angles.length-1;i++) {
+            Log.d("fill", "a" + i);
+            txtSide[i+sides.length].setText(utils.decToFrac(angles[i], 16));
         }
     }
 
