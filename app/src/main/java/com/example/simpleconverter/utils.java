@@ -169,7 +169,7 @@ public class utils {
         AAS
             same as ASA
      */
-    public static boolean isRightTriangle(Triangle t){//TODO fix this, maybe remove?
+    public static boolean isTriangle(Triangle t){//TODO fix this, maybe remove?
         //Check sides, valid if pythagorean theorem
         //Check angles, valid if both angles input and equal 90
         int a,b,c,A,B;//Temp these should be final
@@ -188,7 +188,71 @@ public class utils {
         }
         return true;
     }
-    public static void calculateAngles(Triangle t){//TODO consider making this a boolean to return success
+    public static void calculateTriangle(Triangle t){
+        TriangleTypes type = findType(t);
+        switch(type){
+            case SSS:
+               /* A=arccos((b^2+c^2-a^2)/2bc)
+                B=arccos((a^2+c^2-b^2)/2ac)*/
+                double A = Math.acos((Math.pow(t.getSide(t.side_b),2)+Math.pow(t.getSide(t.side_c),2)-Math.pow(t.getSide(t.side_a),2))/(2*t.getSide(t.side_b)*t.getSide(t.side_c)));
+                double B = Math.acos((Math.pow(t.getSide(t.side_a),2)+Math.pow(t.getSide(t.side_c),2)-Math.pow(t.getSide(t.side_b),2))/(2*t.getSide(t.side_a)*t.getSide(t.side_c)));
+                double C = 180 - A - B;
+                t.setAngle(t.angle_A, A);
+                t.setAngle(t.angle_B, B);
+                t.setAngle(t.angle_C, C);
+                break;
+            case SAS:
+                /*SAS(given aCb in this case)
+            c=sqrt(a^2+b^2-2abcosC)
+            A=arccos((b^2+c^2-a^2)/2bc)
+            B=180-A-C*/
+                break;
+            case SSA:
+                /*SSA(in this case given bcB
+            not always solvable
+            works only if the adjacent side is shorter than the other
+            D=(c/b)sinB
+            D>1 not a triangle
+            D=1 right triangle, works
+            D<1 two possibilities
+                b>=c then B>=C because no triangle can have two obtuse angles it must be unique
+                b<c C maybe acute or obtuse therefore it is impossible to calculate
+            sinC=(c/b)sinB
+            A=180-C-B
+            a=b*(sinA/sinB)*/
+                break;
+            case ASA: case AAS:
+                /*ASA
+                subtract angles from 180
+                a=c(sinA/sinC)
+                b=c(sinB/sinC)
+                AAS
+                same as ASA*/
+                break;
+            case INVALID:
+                Log.d("TriangleCalc","Invalid Triangle");
+                break;
+        }
+    }
+    private enum TriangleTypes{
+        SSS, SAS, SSA, ASA, AAS, INVALID
+    }
+    private static TriangleTypes findType(Triangle t){
+        TriangleTypes type = TriangleTypes.INVALID;
+        if(t.getSide(t.side_a)>0&&t.getSide(t.side_b)>0&&t.getSide(t.side_c)>0)//SSS
+            type=TriangleTypes.SSS;
+        else if((t.getSide(t.side_a)>0&&t.getAngle(t.angle_C)>0&&t.getSide(t.side_b)>0)||(t.getSide(t.side_a)>0&&t.getAngle(t.angle_B)>0&&t.getSide(t.side_c)>0)||(t.getSide(t.side_b)>0&&t.getAngle(t.angle_A)>0&&t.getSide(t.side_c)>0))//SAS aCb aBc bAc
+            type=TriangleTypes.SAS;
+        else if(true)//Todo ADD
+            type=TriangleTypes.SSA;
+        else if(true)//Todo ADD
+            type=TriangleTypes.ASA;
+        else if(true)//Todo ADD
+            type=TriangleTypes.AAS;
+        return type;
+    }
+
+    public static void calculateAnglesR(Triangle t){//TODO legacy, to be removed
         int a,b,c,A,B;//Temp these should be final
         a=0;
         b=1;
@@ -220,7 +284,7 @@ public class utils {
             //not enough information
         }*/
     }
-    public static void calculateSides(Triangle t){//TODO consider making this a boolean to return success
+    public static void calculateSidesR(Triangle t){//TODO legacy, to be removed
         int a,b,c,A,B;//Temp these should be final
         a=0;
         b=1;

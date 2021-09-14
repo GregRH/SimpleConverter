@@ -27,9 +27,9 @@ public class TriangleActivity extends AppCompatActivity {
             }
         }
         t = new Triangle(sides[0],sides[1],sides[2],sides[3],sides[4],90);
-        if(utils.isRightTriangle(t)||true) {//this function isn't finished
-            utils.calculateAngles(t);
-            utils.calculateSides(t);
+        if(true) {//this function isn't finished
+            utils.calculateAnglesR(t);
+            utils.calculateSidesR(t);
             fillTriangle(t);
         }
     }

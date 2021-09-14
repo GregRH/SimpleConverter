@@ -18,7 +18,7 @@ public abstract class Shape {
     public void setAngle(int i, double a){
         angles[i]=a;
     }
-    public void setSides(int i, double s){
+    public void setSides(int i, double s){//todo change to side
         sides[i]=s;
     }
     public abstract String getShape();
