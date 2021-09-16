@@ -33,9 +33,9 @@ public class TriangleActivity extends AppCompatActivity {
             fillTriangle(t);
         }
         Triangle hidden = new Triangle(3,4,5,0,0,0);
-        Triangle hidden1 = new Triangle(3,4,0,0,0,90);//aCb
-        Triangle hidden2 = new Triangle(0,4,5,36.8698,0,0);//cAb
-        Triangle hidden3 = new Triangle(3,0,5,0,53.1301,0);//aBc
+        Triangle hidden1 = new Triangle(0,4,0,36.8698,0,90);//AbC
+        Triangle hidden2 = new Triangle(0,0,5,36.8698,53.1301,0);//AcB
+        Triangle hidden3 = new Triangle(3,0,0,0,53.1301,90);//BaC
        // Triangle hidden4 = new Triangle(3,4,5,0,0,0);
         utils.calculateTriangle(hidden);
         utils.calculateTriangle(hidden1);

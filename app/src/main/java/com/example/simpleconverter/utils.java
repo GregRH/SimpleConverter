@@ -262,6 +262,35 @@ public class utils {
                 b=c(sinB/sinC)
                 AAS
                 same as ASA*/
+
+                //find non zero angles
+                double angle = 180;
+                int pos= t.angle_A;
+                for (int i=0;i<t.getAngle().length;i++){
+                    if(t.getAngle(i)>0)
+                        angle-=t.getAngle(i);
+                    if(t.getAngle(i)==0)
+                        pos=i;
+                }
+                t.setAngle(pos,angle);//set last angle
+                if(t.getSide(t.side_c)>0) {
+                    a = t.getSide(t.side_c) * /*Math.toDegrees*/(Math.sin(Math.toRadians(t.getAngle(t.angle_A))) / Math.sin(Math.toRadians(t.getAngle(t.angle_C))));
+                    b = t.getSide(t.side_c) * /*Math.toDegrees*/(Math.sin(Math.toRadians(t.getAngle(t.angle_B))) / Math.sin(Math.toRadians(t.getAngle(t.angle_C))));
+                    t.setSides(t.side_a,a);
+                    t.setSides(t.side_b,b);
+                }
+                else if(t.getSide(t.side_b)>0){
+                    c = t.getSide(t.side_b) * (Math.sin(Math.toRadians(t.getAngle(t.angle_C))) / Math.sin(Math.toRadians(t.getAngle(t.angle_B))));
+                    t.setSides(t.side_c,c);
+                    a = t.getSide(t.side_c) * (Math.sin(Math.toRadians(t.getAngle(t.angle_A))) / Math.sin(Math.toRadians(t.getAngle(t.angle_C))));
+                    t.setSides(t.side_a,a);
+                }
+                else if(t.getSide(t.side_a)>0){
+                    c = t.getSide(t.side_a) * (Math.sin(Math.toRadians(t.getAngle(t.angle_C))) / Math.sin(Math.toRadians(t.getAngle(t.angle_A))));
+                    t.setSides(t.side_c,c);
+                    b = t.getSide(t.side_c) * (Math.sin(Math.toRadians(t.getAngle(t.angle_B))) / Math.sin(Math.toRadians(t.getAngle(t.angle_C))));
+                    t.setSides(t.side_b,b);
+                }
                 break;
             case INVALID:
                 Log.d("TriangleCalc","Invalid Triangle");
@@ -276,13 +305,13 @@ public class utils {
         //Todo regex might look cleaner
         if(t.getSide(t.side_a)>0&&t.getSide(t.side_b)>0&&t.getSide(t.side_c)>0)//SSS
             type=TriangleTypes.SSS;
-        else if((t.getSide(t.side_a)>0&&t.getAngle(t.angle_C)>0&&t.getSide(t.side_b)>0)||(t.getSide(t.side_a)>0&&t.getAngle(t.angle_B)>0&&t.getSide(t.side_c)>0)||(t.getSide(t.side_b)>0&&t.getAngle(t.angle_A)>0&&t.getSide(t.side_c)>0))//SAS aCb aBc bAc
+        else if(/*aCb*/(t.getSide(t.side_a)>0&&t.getAngle(t.angle_C)>0&&t.getSide(t.side_b)>0)||/*aBc*/(t.getSide(t.side_a)>0&&t.getAngle(t.angle_B)>0&&t.getSide(t.side_c)>0)||/*bAc*/(t.getSide(t.side_b)>0&&t.getAngle(t.angle_A)>0&&t.getSide(t.side_c)>0))//SAS aCb aBc bAc
             type=TriangleTypes.SAS;
-        else if(true)//Todo ADD
+        else if(false)//Todo ADD
             type=TriangleTypes.SSA;
-        else if(true)//Todo ADD
+        else if(/*AcB*/(t.getAngle(t.angle_A)>0&&t.getSide(t.side_c)>0&&t.getAngle(t.angle_B)>0)||/*AbC*/(t.getAngle(t.angle_A)>0&&t.getSide(t.side_b)>0&&t.getAngle(t.angle_C)>0)||/*BaC*/(t.getAngle(t.angle_B)>0&&t.getSide(t.side_a)>0&&t.getAngle(t.angle_C)>0))
             type=TriangleTypes.ASA;
-        else if(true)//Todo ADD
+        else if(/*ABa*//*ACa*//*BCb*//*BAb*//*CBc*//*CAc*/false)//Todo ADD
             type=TriangleTypes.AAS;
         return type;
     }
