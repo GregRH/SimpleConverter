@@ -32,15 +32,15 @@ public abstract class Shape {
         return per;
     }
     public String toString(){//todo consider changing to letters for sides and angles side 1 -> side a angle 1 -> angle A
-        int j = 1;
-        String ret = this.getShape()+": Side "+j;
+        int j = 0;
+        String ret = this.getShape();//+": Side "+j;
         for (double i:sides
              ) {
             j++;
             ret+=" Side "+j+" "+i;
         }
-        j=1;
-        ret+=" Angle "+j;
+        j=0;
+       // ret+=" Angle "+j;
         for (double i:angles
              ) {
             j++;

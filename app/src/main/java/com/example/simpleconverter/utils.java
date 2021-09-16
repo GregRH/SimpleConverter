@@ -190,22 +190,56 @@ public class utils {
     }
     public static void calculateTriangle(Triangle t){
         TriangleTypes type = findType(t);
+        double a,b,c,A,B,C;
         switch(type){
             case SSS:
+                Log.d("Case","SSS");
                /* A=arccos((b^2+c^2-a^2)/2bc)
                 B=arccos((a^2+c^2-b^2)/2ac)*/
-                double A = Math.acos((Math.pow(t.getSide(t.side_b),2)+Math.pow(t.getSide(t.side_c),2)-Math.pow(t.getSide(t.side_a),2))/(2*t.getSide(t.side_b)*t.getSide(t.side_c)));
-                double B = Math.acos((Math.pow(t.getSide(t.side_a),2)+Math.pow(t.getSide(t.side_c),2)-Math.pow(t.getSide(t.side_b),2))/(2*t.getSide(t.side_a)*t.getSide(t.side_c)));
-                double C = 180 - A - B;
+                A = Math.toDegrees(Math.acos((Math.pow(t.getSide(t.side_b),2)+Math.pow(t.getSide(t.side_c),2)-Math.pow(t.getSide(t.side_a),2))/(2*t.getSide(t.side_b)*t.getSide(t.side_c))));
+                B = Math.toDegrees(Math.acos((Math.pow(t.getSide(t.side_a),2)+Math.pow(t.getSide(t.side_c),2)-Math.pow(t.getSide(t.side_b),2))/(2*t.getSide(t.side_a)*t.getSide(t.side_c))));
+                C = 180 - A - B;
                 t.setAngle(t.angle_A, A);
                 t.setAngle(t.angle_B, B);
                 t.setAngle(t.angle_C, C);
                 break;
             case SAS:
+                Log.d("Case","SAS");
                 /*SAS(given aCb in this case)
             c=sqrt(a^2+b^2-2abcosC)
             A=arccos((b^2+c^2-a^2)/2bc)
             B=180-A-C*/
+                if(t.getAngle(t.angle_A)>0){
+                    //solve a from bc
+                    a=Math.sqrt(Math.pow(t.getSide(t.side_c),2)+Math.pow(t.getSide(t.side_b),2)-2*t.getSide(t.side_c)*t.getSide(t.side_b)*Math.cos(Math.toRadians(t.getAngle(t.angle_A))));
+                    t.setSides(t.side_a, a);
+                    B = Math.toDegrees(Math.acos((Math.pow(t.getSide(t.side_a),2)+Math.pow(t.getSide(t.side_c),2)-Math.pow(t.getSide(t.side_b),2))/(2*t.getSide(t.side_a)*t.getSide(t.side_c))));
+                    C = 180 - B - t.getAngle(t.angle_A);
+                    t.setAngle(t.angle_C, C);
+                    t.setAngle(t.angle_B, B);
+
+                }
+                else if(t.getAngle(t.angle_B)>0){
+                    //solve b from ac
+                    b=Math.sqrt(Math.pow(t.getSide(t.side_a),2)+Math.pow(t.getSide(t.side_c),2)-2*t.getSide(t.side_a)*t.getSide(t.side_c)*Math.cos(Math.toRadians(t.getAngle(t.angle_B))));
+                    t.setSides(t.side_b, b);
+                    A =Math.toDegrees(Math.acos((Math.pow(t.getSide(t.side_b),2)+Math.pow(t.getSide(t.side_c),2)-Math.pow(t.getSide(t.side_a),2))/(2*t.getSide(t.side_b)*t.getSide(t.side_c))));
+                    C = 180 - A - t.getAngle(t.angle_B);
+                    t.setAngle(t.angle_A, A);
+                    t.setAngle(t.angle_C, C);
+
+                }
+                else if(t.getAngle(t.angle_C)>0){
+                    //solve c from ab
+                    c=Math.sqrt(Math.pow(t.getSide(t.side_a),2)+Math.pow(t.getSide(t.side_b),2)-2*t.getSide(t.side_a)*t.getSide(t.side_b)*Math.cos(Math.toRadians(t.getAngle(t.angle_C))));
+                    t.setSides(t.side_c, c);
+                    A = Math.toDegrees(Math.acos((Math.pow(t.getSide(t.side_b),2)+Math.pow(t.getSide(t.side_c),2)-Math.pow(t.getSide(t.side_a),2))/(2*t.getSide(t.side_b)*t.getSide(t.side_c))));
+                    Log.d("Hidden1",""+A+" "+c);
+                    B = 180 - A - t.getAngle(t.angle_C);
+                    t.setAngle(t.angle_A, A);
+                    t.setAngle(t.angle_B, B);
+
+                }
                 break;
             case SSA:
                 /*SSA(in this case given bcB
@@ -239,6 +273,7 @@ public class utils {
     }
     private static TriangleTypes findType(Triangle t){
         TriangleTypes type = TriangleTypes.INVALID;
+        //Todo regex might look cleaner
         if(t.getSide(t.side_a)>0&&t.getSide(t.side_b)>0&&t.getSide(t.side_c)>0)//SSS
             type=TriangleTypes.SSS;
         else if((t.getSide(t.side_a)>0&&t.getAngle(t.angle_C)>0&&t.getSide(t.side_b)>0)||(t.getSide(t.side_a)>0&&t.getAngle(t.angle_B)>0&&t.getSide(t.side_c)>0)||(t.getSide(t.side_b)>0&&t.getAngle(t.angle_A)>0&&t.getSide(t.side_c)>0))//SAS aCb aBc bAc
