@@ -14,8 +14,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /*Button b;
+        View.OnClickListener a = (View view)->{int y=5+6;};
+        b.setOnClickListener((View view)->{int y = 5;});*/
     }
     public void toTriangle(View view){
+
         startActivity(new Intent(MainActivity.this, TriangleActivity.class));
     }
 
